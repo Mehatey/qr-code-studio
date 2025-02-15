@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Studio Project</title>
 
-  <!-- Use Firebase 8 instead of 9 -->
+  <!-- Firebase 8 Scripts -->
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
 
@@ -13,35 +13,40 @@
   <script src="script.js" defer></script>
 </head>
 <body>
+  <!-- Intro Section -->
   <div id="intro">
+    <h1 class="typewriter hidden" id="headerText">the good, the bad, the nothing</h1>
     <p class="typewriter hidden" id="disclaimer">
-      Ah good you're here although through deceit what can I say gotta play the game.
+      Ah good you're here through my deceit. 
+      What can I say, gotta play the game.
     </p>
     <img src="pars.png" alt="Parsons Logo" id="logo" />
   </div>
 
+  <!-- Questions Section -->
   <div id="questions" class="hidden">
-    <p class="typewriter hidden">
-      What is one thing you believe is beautiful about this world?
+    <p class="typewriter hidden" id="q1">
+      One thing beautiful about this world?
     </p>
     <textarea
       id="beautifulInput"
-      placeholder="Type your response here..."
+      placeholder="Max 20 words, Min 5 words..."
       class="input-text"
     ></textarea>
 
-    <p class="typewriter hidden">
-      What is one thing you believe is broken about this world?
+    <p class="typewriter hidden" id="q2">
+      One thing broken about this world?
     </p>
     <textarea
       id="brokenInput"
-      placeholder="Type your response here..."
+      placeholder="Max 20 words, Min 5 words..."
       class="input-text"
     ></textarea>
 
     <button id="submit">I believe this.</button>
   </div>
 
+  <!-- Responses Section -->
   <div id="responses" class="hidden">
     <div id="responseList"></div>
   </div>

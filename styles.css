@@ -1,81 +1,106 @@
+/* Dark gradient background, centered content */
 body {
     background: linear-gradient(to bottom, #000000, #333333);
     font-family: 'Courier New', Courier, monospace;
     color: #ffffff;
+    min-height: 100vh;
+    margin: 0;
+    padding: 20px;
+    box-sizing: border-box;
+  
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    padding: 20px;
-    box-sizing: border-box;
-}
-
-#header {
-    text-align: center;
-    margin-bottom: 20px;
-    font-size: 28px;
-    line-height: 1.5;
-}
-
-.typewriter {
+    justify-content: flex-start;
+  }
+  
+  /* Hide elements until we remove 'hidden' in JS */
+  .hidden {
+    display: none;
+  }
+  
+  /* Typewriter effect with multi-line wrap & faster typing */
+  .typewriter {
+    display: inline-block;
+    white-space: normal;   /* allows multiple lines */
     overflow: hidden;
-    white-space: nowrap;
-    animation: typing 3s steps(80, end) 1s forwards;
-    text-align: center;
-    max-width: 100%;
+    border-right: 2px solid #fff;
+    
+    /* Type faster & blink cursor, then remove it on completion */
+    animation: typing 2s steps(50, end) forwards, blink-caret 0.7s step-end infinite;
+    
     font-size: 18px;
-    margin-bottom: 20px;
-}
-
-.hidden { display: none; }
-
-@keyframes typing {
-    from { width: 0 }
-    to { width: 100% }
-}
-
-textarea.input-text {
-    margin: 20px;
-    padding: 10px;
-    width: 100%;
+    max-width: 90%;
+    margin: 20px auto;
+    text-align: center;
+    line-height: 1.4;
+  }
+  
+  /* Keyframes for typewriting */
+  @keyframes typing {
+    from { width: 0; }
+    to { width: 100%; }
+  }
+  
+  /* Keyframes for blinking cursor */
+  @keyframes blink-caret {
+    50% { border-color: transparent; }
+  }
+  
+  /* Class to stop the cursor blink & remove border when done */
+  .done-typing {
+    animation: none !important;
+    border-right: none !important;
+  }
+  
+  /* Centering & spacing for the Parsons logo */
+  #logo {
+    width: 80px;
+    height: auto;
+    margin: 20px auto;
+    display: block;
+  }
+  
+  /* Textarea styling */
+  .input-text {
+    display: block;
+    width: 90%;
     max-width: 500px;
+    margin: 20px auto;
+    padding: 12px;
+    font-size: 14px;
     background-color: #111;
     color: #fff;
-    font-size: 14px;
+    border: 1px solid #666;
     border-radius: 8px;
-}
-
-button {
-    margin: 20px;
-    padding: 15px 30px;
+  }
+  
+  /* Button styling */
+  button {
+    display: block;
+    margin: 20px auto;
+    padding: 15px 40px;
     font-size: 18px;
-    background-color: #333;
+    background-color: #555;
     color: #fff;
     border: none;
     border-radius: 8px;
     cursor: pointer;
-}
-
-button:disabled {
-    background-color: #555;
-    cursor: not-allowed;
-}
-
-#logo {
-    width: 80px;
-    height: auto;
-    margin-top: 20px;
-}
-
-.tick {
-    margin-top: 20px;
-    font-size: 20px;
-    color: #00ff00;
-    animation: fadeOut 2s ease-in-out 1s forwards;
-}
-
-@keyframes fadeOut {
-    0% { opacity: 1; }
-    100% { opacity: 0; }
-}
+  }
+  
+  /* Response styling */
+  #responseList p {
+    max-width: 500px;
+    margin: 10px auto;
+    font-size: 16px;
+    line-height: 1.4;
+    text-align: center;
+  }
+  
+  #responseList hr {
+    border: 0;
+    border-top: 1px solid #666;
+    width: 50%;
+    margin: 10px auto;
+  }
+  
