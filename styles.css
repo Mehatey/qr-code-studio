@@ -1,77 +1,161 @@
-/* Dark gradient background, centered content */
+/* Global body styling */
 body {
     background: linear-gradient(to bottom, #000000, #333333);
     font-family: 'Courier New', Courier, monospace;
     color: #ffffff;
-    min-height: 100vh;
     margin: 0;
-    padding: 20px;
+    padding: 0;
     box-sizing: border-box;
-  
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
+    min-height: 100vh;
+    overflow-y: auto; /* allow scrolling if needed */
   }
   
-  /* Hidden by default, we fade in via JS */
+  /* Hide sections until revealed by JS */
   .hidden {
     display: none;
   }
   
-  /* Simple fade-in animation */
-  .fade-in {
-    animation: fadeIn 1.5s forwards ease-in;
+  /* SCREEN 1 */
+  #screen1 {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 80px 20px 100px; /* top=80, bottom=100 for spacing above arrow */
+    text-align: center;
+    position: relative;
+    min-height: 100vh; /* fill screen height */
   }
   
-  /* Keyframes for fade-in effect */
-  @keyframes fadeIn {
-    0%   { opacity: 0; }
-    100% { opacity: 1; }
+  /* Top bar with left/right images */
+  #topBar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 30px;
   }
   
-  /* Logo styling */
-  #logo {
-    width: 80px;
+  #gbLogo {
+    width: 180px;
     height: auto;
-    margin: 20px auto;
     display: block;
   }
   
-  /* Textarea styling */
-  .input-text {
+  #parsSmall {
+    width: 60px;
+    height: auto;
     display: block;
-    width: 90%;
-    max-width: 500px;
-    margin: 20px auto;
-    padding: 12px;
-    font-size: 14px;
-    background-color: #111;
-    color: #fff;
-    border: 1px solid #666;
-    border-radius: 8px;
   }
   
-  /* Button styling */
-  button {
-    display: block;
+  /* Disclaimer text in center */
+  #disclaimerText {
+    font-size: 16px;
+    line-height: 1.4;
     margin: 20px auto;
-    padding: 15px 40px;
-    font-size: 18px;
-    background-color: #555;
-    color: #fff;
-    border: none;
-    border-radius: 8px;
+    max-width: 85%;
+    text-align: center;
+  }
+  
+  /* Arrow circle at bottom center on screen 1 */
+  #arrowCircle {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+  
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #000;
+    border: 2px solid #fff;
     cursor: pointer;
   }
   
-  /* Response styling */
-  #responseList p {
+  #arrowCircle::before {
+    content: '';
+    display: block;
+    width: 0;
+    height: 0;
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    border-left: 12px solid #fff;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  /* SCREEN 2 */
+  #screen2 {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 80px 20px 100px; /* same spacing so button has room at bottom */
+    text-align: center;
+    position: relative;
+    min-height: 100vh;
+  }
+  
+  /* Larger question text */
+  .questionText {
+    font-size: 18px;
+    margin: 20px 0 10px;
+    line-height: 1.4;
+  }
+  
+  /* Bigger text area with min-height */
+  .input-text {
+    width: 90%;
     max-width: 500px;
+    min-height: 120px;
+    background-color: #111;
+    color: #fff;
+    font-size: 14px;
+    border: 1px solid #666;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    padding: 10px;
+  }
+  
+  /* Submit button at bottom center, disabled by default */
+  #submitBtn {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+  
+    font-size: 14px;
+    background-color: #666; /* disabled = gray */
+    color: #ccc;
+    border: none;
+    border-radius: 0;
+    padding: 12px 16px;
+    cursor: not-allowed;
+  }
+  
+  /* Enabled style (black background, white text) */
+  #submitBtn.enabled {
+    background-color: #000;
+    color: #fff;
+    cursor: pointer;
+  }
+  
+  /* SCREEN 3 (responses) */
+  #responses {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 80px 20px;
+    text-align: center;
+    min-height: 100vh;
+  }
+  
+  #responseList p {
     margin: 10px auto;
     font-size: 16px;
     line-height: 1.4;
-    text-align: center;
+    max-width: 500px;
   }
   
   #responseList hr {

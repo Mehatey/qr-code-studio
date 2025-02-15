@@ -2,55 +2,64 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Studio Project</title>
 
-  <!-- Firebase 8 Scripts -->
+  <!-- Firebase v8 scripts -->
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
 
   <!-- Your CSS -->
   <link rel="stylesheet" href="styles.css" />
-  
-  <!-- Main JS -->
+
+  <!-- Your JS -->
   <script src="script.js" defer></script>
 </head>
 <body>
-  <!-- Intro Section -->
-  <div id="intro">
-    <h1 id="headerText" class="hidden">the good, the bad, the nothing</h1>
-    <p id="disclaimer" class="hidden">
-      Ah good you're here although through deceit. What can I say, gotta play the game.
+
+  <!-- SCREEN 1 -->
+  <div id="screen1">
+    <div id="topBar">
+      <!-- left: good bad nothing image -->
+      <img src="logogb.png" alt="Good, Bad, Nothing" id="gbLogo" />
+      <!-- right: parsons small -->
+      <img src="pars.png" alt="Parsons Logo" id="parsSmall" />
+    </div>
+
+    <!-- Disclaimer text in center -->
+    <p id="disclaimerText">
+      I apologize for deceiving you. I had to abuse the attention economy we live in.
+      Your answers to these 2 questions will help create a VR experience.
     </p>
-    <img src="pars.png" alt="Parsons Logo" id="logo" />
+
+    <!-- Arrow circle at bottom center -->
+    <div id="arrowCircle"></div>
   </div>
 
-  <!-- Questions Section -->
-  <div id="questions" class="hidden">
-    <p id="q1" class="hidden">
-      One thing beautiful about this world?
-    </p>
+  <!-- SCREEN 2 -->
+  <div id="screen2" class="hidden">
+    <p class="questionText">One thing beautiful about this world?</p>
     <textarea
       id="beautifulInput"
-      placeholder="Max 20, Min 1 word..."
       class="input-text"
+      placeholder="Max 200, Min 5 words..."
     ></textarea>
 
-    <p id="q2" class="hidden">
-      One thing broken about this world?
-    </p>
+    <p class="questionText">One thing broken about this world?</p>
     <textarea
       id="brokenInput"
-      placeholder="Max 20, Min 1 word..."
       class="input-text"
+      placeholder="Max 200, Min 5 words..."
     ></textarea>
 
-    <button id="submit">I believe this.</button>
+    <!-- Submit button at bottom center -->
+    <button id="submitBtn" disabled>I believe this.</button>
   </div>
 
-  <!-- Responses Section -->
+  <!-- SCREEN 3: shows responses after submit -->
   <div id="responses" class="hidden">
     <div id="responseList"></div>
   </div>
+
 </body>
 </html>
