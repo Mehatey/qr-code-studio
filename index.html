@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Studio Project</title>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js"></script>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="script.js" defer></script>
+</head>
+<body>
+  <div id="intro">
+    <p class="typewriter hidden" id="disclaimer">Ah good you're here although through deceit what can I say gotta play the game.</p>
+    <img src="pars.png" alt="Parsons Logo" id="logo" />
+  </div>
+
+  <div id="questions" class="hidden">
+    <p class="typewriter hidden">What is one thing you believe is beautiful about this world?</p>
+    <textarea id="beautifulInput" placeholder="Type your response here... (1 to 20 words)" class="input-text"></textarea>
+
+    <p class="typewriter hidden">What is one thing you believe is broken about this world?</p>
+    <textarea id="brokenInput" placeholder="Type your response here... (1 to 20 words)" class="input-text"></textarea>
+
+    <button id="submit" disabled>I believe this.</button>
+  </div>
+
+  <div id="responses" class="hidden">
+    <div id="responseList"></div>
+  </div>
+</body>
+</html>
