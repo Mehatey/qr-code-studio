@@ -1,66 +1,62 @@
-// Final script.js for Firebase integration using version 8
-
-// Initialize Firebase
-var firebaseConfig = {
-    apiKey: "AIzaSyAhKNE7ycFQGo_0OUChCRRSh6jKom6rWyk",
-    authDomain: "good-or-bad-or-nothing-at-all.firebaseapp.com",
-    databaseURL: "https://good-or-bad-or-nothing-at-all-default-rtdb.firebaseio.com",
-    projectId: "good-or-bad-or-nothing-at-all",
-    storageBucket: "good-or-bad-or-nothing-at-all.appspot.com",
-    messagingSenderId: "591627005378",
-    appId: "1:591627005378:web:40255eabc81a8afa943a5b",
-    measurementId: "G-7CPTXQKWG6"
-};
-firebase.initializeApp(firebaseConfig);
-var db = firebase.database();
-
 document.addEventListener('DOMContentLoaded', () => {
+    // Firebase config for your project
+    const firebaseConfig = {
+      apiKey: "AIzaSy...",
+      authDomain: "good-or-bad-or-nothing-at-all.firebaseapp.com",
+      databaseURL: "https://good-or-bad-or-nothing-at-all-default-rtdb.firebaseio.com",
+      projectId: "good-or-bad-or-nothing-at-all",
+      storageBucket: "good-or-bad-or-nothing-at-all.appspot.com",
+      messagingSenderId: "591627005378",
+      appId: "1:591627005378:web:40255eabc81a8afa943a5b"
+    };
+  
+    // Initialize Firebase (version 8 style)
+    firebase.initializeApp(firebaseConfig);
+    const database = firebase.database();
+  
+    // Grab references
     const intro = document.getElementById('intro');
     const questions = document.getElementById('questions');
-    const submitButton = document.getElementById('submit');
-    const beautifulInput = document.getElementById('beautifulInput');
-    const brokenInput = document.getElementById('brokenInput');
-
+    const responses = document.getElementById('responses');
+    const responseList = document.getElementById('responseList');
+  
+    // Show questions after disclaimer
     setTimeout(() => {
-        intro.classList.add('hidden');
-        questions.classList.remove('hidden');
+      intro.classList.add('hidden');
+      questions.classList.remove('hidden');
     }, 6000);
-
-    function checkWordLimit() {
-        const beautifulWords = beautifulInput.value.trim().split(/\s+/).length;
-        const brokenWords = brokenInput.value.trim().split(/\s+/).length;
-        submitButton.disabled = !(beautifulWords >= 1 && beautifulWords <= 20 && brokenWords >= 1 && brokenWords <= 20);
-    }
-
-    beautifulInput.addEventListener('input', checkWordLimit);
-    brokenInput.addEventListener('input', checkWordLimit);
-
-    submitButton.addEventListener('click', () => {
-        const beautiful = beautifulInput.value.trim();
-        const broken = brokenInput.value.trim();
-
-        db.ref('responses').push({ beautiful, broken });
-
-        questions.classList.add('hidden');
-        const responses = document.getElementById('responses');
-        responses.classList.remove('hidden');
-
-        const tick = document.createElement('div');
-        tick.classList.add('tick');
-        tick.innerHTML = '✔️ You have submitted your beliefs';
-        responses.appendChild(tick);
-
-        setTimeout(() => {
-            tick.remove();
-            db.ref('responses').on('value', (snapshot) => {
-                const responseList = document.getElementById('responseList');
-                responseList.innerHTML = '';
-                snapshot.forEach((child) => {
-                    const data = child.val();
-                    responseList.innerHTML += `<p><strong>Beautiful:</strong> ${data.beautiful}</p>`;
-                    responseList.innerHTML += `<p><strong>Broken:</strong> ${data.broken}</p>`;
-                });
-            });
-        }, 2000);
+  
+    // On button click: store & retrieve
+    document.getElementById('submit').addEventListener('click', () => {
+      const beautifulResponse = document.getElementById('beautifulInput').value.trim();
+      const brokenResponse = document.getElementById('brokenInput').value.trim();
+  
+      if (!beautifulResponse || !brokenResponse) {
+        alert("Please answer both questions.");
+        return;
+      }
+  
+      // Push to Firebase
+      database.ref('responses').push({
+        beautiful: beautifulResponse,
+        broken: brokenResponse
+      });
+  
+      // Hide questions, show responses
+      questions.classList.add('hidden');
+      responses.classList.remove('hidden');
+  
+      // Retrieve data from Firebase & display
+      database.ref('responses').once('value', (snapshot) => {
+        const data = snapshot.val() || {};
+        let html = '';
+        Object.keys(data).forEach((key) => {
+          html += `<p><strong>Beautiful:</strong> ${data[key].beautiful}</p>`;
+          html += `<p><strong>Broken:</strong> ${data[key].broken}</p>`;
+          html += '<hr>';
+        });
+        responseList.innerHTML = html;
+      });
     });
-});
+  });
+  
