@@ -1,57 +1,64 @@
-/* Global body styling */
-body {
-    background: linear-gradient(to bottom, #000000, #333333);
-    font-family: 'Courier New', Courier, monospace;
-    color: #ffffff;
+/* Remove horizontal scrolling on mobile and ensure everything fits */
+html, body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    min-height: 100vh;
-    overflow-y: auto; /* allow scrolling if needed */
+    overflow-x: hidden; /* no horizontal scroll */
+    max-width: 100%;    /* keep content within screen width */
+    font-family: 'Courier New', Courier, monospace;
   }
   
-  /* Hide sections until revealed by JS */
+  /* Dark gradient background for the entire body */
+  body {
+    background: linear-gradient(to bottom, #000000, #333333);
+    color: #ffffff;
+  }
+  
+  /* Hide sections until shown by JS */
   .hidden {
     display: none;
   }
   
-  /* SCREEN 1 */
+  /* SCREEN 1 container: center, with top/bottom padding */
   #screen1 {
     width: 100%;
     max-width: 600px;
     margin: 0 auto;
-    padding: 80px 20px 100px; /* top=80, bottom=100 for spacing above arrow */
+    padding: 60px 20px 100px; /* top=60, bottom=100 for arrow space */
     text-align: center;
     position: relative;
-    min-height: 100vh; /* fill screen height */
+    min-height: 100vh;
   }
   
-  /* Top bar with left/right images */
+  /* topBar with two logos spaced well */
   #topBar {
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin-bottom: 30px;
+    padding: 0 10px; /* small horizontal padding so they don’t touch edges */
   }
   
+  /* Good, Bad, Nothing image on left */
   #gbLogo {
-    width: 180px;
+    width: 150px;
     height: auto;
     display: block;
   }
   
+  /* Parsons small on right */
   #parsSmall {
-    width: 60px;
+    width: 50px;
     height: auto;
     display: block;
   }
   
-  /* Disclaimer text in center */
-  #disclaimerText {
+  /* disclaimers in separate paragraphs, centered, with breathing room */
+  .disclaimerLine {
     font-size: 16px;
     line-height: 1.4;
-    margin: 20px auto;
-    max-width: 85%;
+    max-width: 90%;
+    margin: 10px auto;
     text-align: center;
   }
   
@@ -70,7 +77,6 @@ body {
     border: 2px solid #fff;
     cursor: pointer;
   }
-  
   #arrowCircle::before {
     content: '';
     display: block;
@@ -90,20 +96,28 @@ body {
     width: 100%;
     max-width: 600px;
     margin: 0 auto;
-    padding: 80px 20px 100px; /* same spacing so button has room at bottom */
+    padding: 60px 20px 100px; /* same spacing so button has room at bottom */
     text-align: center;
     position: relative;
     min-height: 100vh;
   }
   
-  /* Larger question text */
+  /* Very small logo top center for screen2 */
+  #gbLogo2 {
+    width: 80px;
+    height: auto;
+    margin: 0 auto 20px auto;
+    display: block;
+  }
+  
+  /* question text bigger, centered */
   .questionText {
     font-size: 18px;
     margin: 20px 0 10px;
     line-height: 1.4;
   }
   
-  /* Bigger text area with min-height */
+  /* larger text areas, no horizontal scroll */
   .input-text {
     width: 90%;
     max-width: 500px;
@@ -115,9 +129,10 @@ body {
     border-radius: 6px;
     margin-bottom: 20px;
     padding: 10px;
+    overflow-x: hidden; /* no horizontal scroll in text box */
   }
   
-  /* Submit button at bottom center, disabled by default */
+  /* Submit button at same bottom center position as arrow */
   #submitBtn {
     position: fixed;
     bottom: 30px;
@@ -134,7 +149,7 @@ body {
     cursor: not-allowed;
   }
   
-  /* Enabled style (black background, white text) */
+  /* Enabled style (black bg, white text) */
   #submitBtn.enabled {
     background-color: #000;
     color: #fff;

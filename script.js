@@ -23,13 +23,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const brokenInput = document.getElementById('brokenInput');
     const responseList = document.getElementById('responseList');
   
-    // 1) Arrow click: go to screen 2
+    // 1) Arrow click -> screen 2
     arrowCircle.addEventListener('click', () => {
       screen1.classList.add('hidden');
       screen2.classList.remove('hidden');
     });
   
-    // 2) Enable/disable 'I believe this' based on text input
+    // 2) Enable/disable Submit button
     function updateButtonState() {
       const hasBeautiful = beautifulInput.value.trim().length > 0;
       const hasBroken = brokenInput.value.trim().length > 0;
@@ -45,21 +45,21 @@ document.addEventListener('DOMContentLoaded', () => {
     beautifulInput.addEventListener('input', updateButtonState);
     brokenInput.addEventListener('input', updateButtonState);
   
-    // 3) On submit, store & display responses
+    // 3) On submit, store & display
     submitBtn.addEventListener('click', () => {
       if (submitBtn.disabled) return;
   
       const beautiful = beautifulInput.value.trim();
       const broken = brokenInput.value.trim();
   
-      // Push to Firebase
+      // Save to Firebase
       db.ref('responses').push({ beautiful, broken });
   
-      // Hide screen2, show responses
+      // Switch to responses
       screen2.classList.add('hidden');
       responsesDiv.classList.remove('hidden');
   
-      // Retrieve from Firebase & display
+      // Retrieve and display
       db.ref('responses').once('value', snapshot => {
         const data = snapshot.val() || {};
         let html = '';
