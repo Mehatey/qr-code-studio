@@ -1,4 +1,4 @@
-/* Remove horizontal scrolling, ensure content fits on mobile */
+/* Remove horizontal scroll, ensure content fits on mobile */
 html, body {
     margin: 0;
     padding: 0;
@@ -8,7 +8,7 @@ html, body {
     font-family: 'Courier New', Courier, monospace;
   }
   
-  /* Dark gradient background */
+  /* Dark gradient background for entire body */
   body {
     background: linear-gradient(to bottom, #000000, #333333);
     color: #ffffff;
@@ -19,7 +19,7 @@ html, body {
     display: none;
   }
   
-  /* SCREEN 1 */
+  /* SCREEN 1 (Intro) */
   #screen1 {
     width: 100%;
     max-width: 600px;
@@ -30,29 +30,25 @@ html, body {
     min-height: 100vh;
   }
   
-  /* Top bar with 2 logos spaced well, extra padding to avoid cut-off */
+  /* Top bar with 2 logos spaced well, ensure no cut-off on mobile */
   #topBar {
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin-bottom: 30px;
-    padding: 0 15px; /* slightly bigger horizontal padding so logos don’t get cut off */
+    padding: 0 15px;
   }
   
-  /* Good, Bad, Nothing image on the left */
   #gbLogo {
     width: 140px;
     height: auto;
     display: block;
   }
   
-  /* Parsons small on the right */
   #parsSmall {
     width: 50px;
     height: auto;
     display: block;
-    /* Move it slightly left by adding negative right margin if needed (optional) */
-    margin-right: 0; 
   }
   
   /* disclaimers in separate paragraphs, centered */
@@ -64,7 +60,7 @@ html, body {
     text-align: center;
   }
   
-  /* Arrow circle at bottom center on screen 1 */
+  /* Arrow circle at bottom center on Screen 1 */
   #arrowCircle {
     position: fixed;
     bottom: 30px;
@@ -79,10 +75,11 @@ html, body {
     border: 2px solid #fff;
     cursor: pointer;
   }
+  
   #arrowCircle::before {
     content: '';
     display: block;
-    width: 0; 
+    width: 0;
     height: 0;
     border-top: 8px solid transparent;
     border-bottom: 8px solid transparent;
@@ -93,7 +90,7 @@ html, body {
     transform: translate(-50%, -50%);
   }
   
-  /* SCREEN 2 */
+  /* SCREEN 2 (Questions) */
   #screen2 {
     width: 100%;
     max-width: 600px;
@@ -104,7 +101,6 @@ html, body {
     min-height: 100vh;
   }
   
-  /* Very small logo top center for screen 2 */
   #gbLogo2 {
     width: 80px;
     height: auto;
@@ -112,18 +108,18 @@ html, body {
     display: block;
   }
   
-  /* question text bigger, centered */
+  /* bigger question text */
   .questionText {
     font-size: 18px;
     margin: 20px 0 10px;
     line-height: 1.4;
   }
   
-  /* narrower text area, a bit taller vertically */
+  /* narrower text area, taller to avoid horizontal scroll & provide more room */
   .input-text {
-    width: 85%;       /* narrower so it doesn't overflow the screen */
+    width: 85%;
     max-width: 500px;
-    min-height: 140px; /* slightly taller */
+    min-height: 140px;
     background-color: #111;
     color: #fff;
     font-size: 14px;
@@ -134,7 +130,7 @@ html, body {
     overflow-x: hidden;
   }
   
-  /* Submit button at bottom center */
+  /* Submit button at bottom center, disabled by default */
   #submitBtn {
     position: fixed;
     bottom: 30px;
@@ -150,16 +146,56 @@ html, body {
     padding: 12px 16px;
     cursor: not-allowed;
   }
-  
-  /* Enabled style (black bg, white text) */
   #submitBtn.enabled {
     background-color: #000;
     color: #fff;
     cursor: pointer;
   }
   
-  /* SCREEN 3 (responses) */
-  #responses {
+  /* SCREEN 3 (Confirmation) */
+  #screen3 {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 80px 20px;
+    text-align: center;
+    min-height: 100vh;
+    position: relative;
+  }
+  
+  #yinImg {
+    width: 80px;
+    height: auto;
+    margin: 40px auto;
+    display: block;
+  }
+  
+  #confirmationMessage {
+    font-size: 18px;
+    margin: 20px auto;
+    line-height: 1.4;
+    max-width: 80%;
+    text-align: center;
+  }
+  
+  /* See Others button at bottom center */
+  #seeOthersBtn {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 14px;
+    background-color: #000;
+    color: #fff;
+    border: none;
+    border-radius: 0;
+    padding: 12px 16px;
+    cursor: pointer;
+    z-index: 1000;
+  }
+  
+  /* SCREEN 4 (Responses) */
+  #screen4 {
     width: 100%;
     max-width: 600px;
     margin: 0 auto;

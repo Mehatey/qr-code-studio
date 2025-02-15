@@ -12,24 +12,28 @@ document.addEventListener('DOMContentLoaded', () => {
     firebase.initializeApp(firebaseConfig);
     const db = firebase.database();
   
-    // Grab references
+    // Screen references
     const screen1 = document.getElementById('screen1');
     const screen2 = document.getElementById('screen2');
-    const responsesDiv = document.getElementById('responses');
+    const screen3 = document.getElementById('screen3'); // confirmation
+    const screen4 = document.getElementById('screen4'); // past responses
   
+    // Elements
     const arrowCircle = document.getElementById('arrowCircle');
-    const submitBtn = document.getElementById('submitBtn');
     const beautifulInput = document.getElementById('beautifulInput');
     const brokenInput = document.getElementById('brokenInput');
+    const submitBtn = document.getElementById('submitBtn');
+    const seeOthersBtn = document.getElementById('seeOthersBtn');
     const responseList = document.getElementById('responseList');
   
-    // 1) Arrow click -> screen 2
+    // ============= NAVIGATION =============
+    // Arrow on screen1 -> screen2
     arrowCircle.addEventListener('click', () => {
       screen1.classList.add('hidden');
       screen2.classList.remove('hidden');
     });
   
-    // 2) Enable/disable Submit button
+    // ============= ENABLE/DISABLE SUBMIT =============
     function updateButtonState() {
       const hasBeautiful = beautifulInput.value.trim().length > 0;
       const hasBroken = brokenInput.value.trim().length > 0;
@@ -41,29 +45,34 @@ document.addEventListener('DOMContentLoaded', () => {
         submitBtn.classList.remove('enabled');
       }
     }
-  
     beautifulInput.addEventListener('input', updateButtonState);
     brokenInput.addEventListener('input', updateButtonState);
   
-    // 3) On submit, store & display
+    // ============= SUBMIT -> SCREEN3 (CONFIRMATION) =============
     submitBtn.addEventListener('click', () => {
       if (submitBtn.disabled) return;
   
       const beautiful = beautifulInput.value.trim();
       const broken = brokenInput.value.trim();
   
-      // Save to Firebase
+      // Push data to Firebase
       db.ref('responses').push({ beautiful, broken });
   
-      // Switch to responses
+      // Hide screen2, show screen3 (confirmation)
       screen2.classList.add('hidden');
-      responsesDiv.classList.remove('hidden');
+      screen3.classList.remove('hidden');
+    });
   
-      // Retrieve and display
-      db.ref('responses').once('value', snapshot => {
+    // ============= SEE OTHERS -> SCREEN4 (PAST RESPONSES) =============
+    seeOthersBtn.addEventListener('click', () => {
+      screen3.classList.add('hidden');
+      screen4.classList.remove('hidden');
+  
+      // Retrieve data from Firebase
+      db.ref('responses').once('value', (snapshot) => {
         const data = snapshot.val() || {};
         let html = '';
-        Object.keys(data).forEach(key => {
+        Object.keys(data).forEach((key) => {
           html += `<p><strong>Beautiful:</strong> ${data[key].beautiful}</p>`;
           html += `<p><strong>Broken:</strong> ${data[key].broken}</p>`;
           html += '<hr>';

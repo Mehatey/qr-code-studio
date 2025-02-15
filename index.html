@@ -5,28 +5,28 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Studio Project</title>
 
-  <!-- Firebase v8 scripts -->
+  <!-- Firebase 8 Scripts -->
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
 
-  <!-- Your CSS -->
+  <!-- Styles -->
   <link rel="stylesheet" href="styles.css" />
 
-  <!-- Your JS -->
+  <!-- Main JS -->
   <script src="script.js" defer></script>
 </head>
 <body>
 
-  <!-- SCREEN 1 -->
+  <!-- SCREEN 1 (Intro) -->
   <div id="screen1">
     <div id="topBar">
-      <!-- left: good, bad, nothing image -->
+      <!-- Left: Good, Bad, Nothing image -->
       <img src="logogb.png" alt="Good, Bad, Nothing" id="gbLogo" />
-      <!-- right: parsons small -->
+      <!-- Right: Parsons small -->
       <img src="pars.png" alt="Parsons Logo" id="parsSmall" />
     </div>
 
-    <!-- disclaimers in two paragraphs for spacing -->
+    <!-- disclaimers in separate paragraphs -->
     <p class="disclaimerLine">
       I apologize for deceiving you. I had to abuse the attention economy we live in.
     </p>
@@ -34,35 +34,42 @@
       Your answers to these 2 questions will help create a VR experience.
     </p>
 
-    <!-- Arrow circle at bottom center -->
+    <!-- Arrow Circle at bottom center -->
     <div id="arrowCircle"></div>
   </div>
 
-  <!-- SCREEN 2 -->
+  <!-- SCREEN 2 (Questions) -->
   <div id="screen2" class="hidden">
-    <!-- Very small logo top center -->
+    <!-- Small logo on top center if you wish -->
     <img src="logogb.png" alt="Good, Bad, Nothing" id="gbLogo2" />
 
-    <p class="questionText">Beauty in this world?</p>
+    <p class="questionText">One thing beautiful about this world?</p>
     <textarea
       id="beautifulInput"
       class="input-text"
       placeholder="Max 200, Min 5 words..."
     ></textarea>
 
-    <p class="questionText">Broken about this world?</p>
+    <p class="questionText">One thing broken about this world?</p>
     <textarea
       id="brokenInput"
       class="input-text"
       placeholder="Max 200, Min 5 words..."
     ></textarea>
 
-    <!-- Submit button at bottom center -->
+    <!-- Disabled by default, becomes enabled once both textareas have content -->
     <button id="submitBtn" disabled>I believe this.</button>
   </div>
 
-  <!-- SCREEN 3: shows responses after submit -->
-  <div id="responses" class="hidden">
+  <!-- SCREEN 3 (Confirmation) -->
+  <div id="screen3" class="hidden">
+    <img src="yin.gif" alt="Yin Symbol" id="yinImg" />
+    <p id="confirmationMessage">Your beliefs have been recorded.</p>
+    <button id="seeOthersBtn">See Others</button>
+  </div>
+
+  <!-- SCREEN 4 (Responses) -->
+  <div id="screen4" class="hidden">
     <div id="responseList"></div>
   </div>
 
