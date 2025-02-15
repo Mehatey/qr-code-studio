@@ -1,14 +1,14 @@
-/* Remove horizontal scrolling on mobile and ensure everything fits */
+/* Remove horizontal scrolling, ensure content fits on mobile */
 html, body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    overflow-x: hidden; /* no horizontal scroll */
-    max-width: 100%;    /* keep content within screen width */
+    overflow-x: hidden;
+    max-width: 100%;
     font-family: 'Courier New', Courier, monospace;
   }
   
-  /* Dark gradient background for the entire body */
+  /* Dark gradient background */
   body {
     background: linear-gradient(to bottom, #000000, #333333);
     color: #ffffff;
@@ -19,41 +19,43 @@ html, body {
     display: none;
   }
   
-  /* SCREEN 1 container: center, with top/bottom padding */
+  /* SCREEN 1 */
   #screen1 {
     width: 100%;
     max-width: 600px;
     margin: 0 auto;
-    padding: 60px 20px 100px; /* top=60, bottom=100 for arrow space */
+    padding: 60px 20px 100px;
     text-align: center;
     position: relative;
     min-height: 100vh;
   }
   
-  /* topBar with two logos spaced well */
+  /* Top bar with 2 logos spaced well, extra padding to avoid cut-off */
   #topBar {
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin-bottom: 30px;
-    padding: 0 10px; /* small horizontal padding so they don’t touch edges */
+    padding: 0 15px; /* slightly bigger horizontal padding so logos don’t get cut off */
   }
   
-  /* Good, Bad, Nothing image on left */
+  /* Good, Bad, Nothing image on the left */
   #gbLogo {
-    width: 150px;
+    width: 140px;
     height: auto;
     display: block;
   }
   
-  /* Parsons small on right */
+  /* Parsons small on the right */
   #parsSmall {
     width: 50px;
     height: auto;
     display: block;
+    /* Move it slightly left by adding negative right margin if needed (optional) */
+    margin-right: 0; 
   }
   
-  /* disclaimers in separate paragraphs, centered, with breathing room */
+  /* disclaimers in separate paragraphs, centered */
   .disclaimerLine {
     font-size: 16px;
     line-height: 1.4;
@@ -80,7 +82,7 @@ html, body {
   #arrowCircle::before {
     content: '';
     display: block;
-    width: 0;
+    width: 0; 
     height: 0;
     border-top: 8px solid transparent;
     border-bottom: 8px solid transparent;
@@ -96,13 +98,13 @@ html, body {
     width: 100%;
     max-width: 600px;
     margin: 0 auto;
-    padding: 60px 20px 100px; /* same spacing so button has room at bottom */
+    padding: 60px 20px 100px;
     text-align: center;
     position: relative;
     min-height: 100vh;
   }
   
-  /* Very small logo top center for screen2 */
+  /* Very small logo top center for screen 2 */
   #gbLogo2 {
     width: 80px;
     height: auto;
@@ -117,11 +119,11 @@ html, body {
     line-height: 1.4;
   }
   
-  /* larger text areas, no horizontal scroll */
+  /* narrower text area, a bit taller vertically */
   .input-text {
-    width: 90%;
+    width: 85%;       /* narrower so it doesn't overflow the screen */
     max-width: 500px;
-    min-height: 120px;
+    min-height: 140px; /* slightly taller */
     background-color: #111;
     color: #fff;
     font-size: 14px;
@@ -129,10 +131,10 @@ html, body {
     border-radius: 6px;
     margin-bottom: 20px;
     padding: 10px;
-    overflow-x: hidden; /* no horizontal scroll in text box */
+    overflow-x: hidden;
   }
   
-  /* Submit button at same bottom center position as arrow */
+  /* Submit button at bottom center */
   #submitBtn {
     position: fixed;
     bottom: 30px;
