@@ -23,32 +23,26 @@ document.addEventListener('DOMContentLoaded', () => {
     const q1 = document.getElementById('q1');
     const q2 = document.getElementById('q2');
   
-    // Show the header & disclaimer immediately to start typewriter
+    // 1) Fade in the header & disclaimer immediately
     headerText.classList.remove('hidden');
     disclaimer.classList.remove('hidden');
+    headerText.classList.add('fade-in');
+    disclaimer.classList.add('fade-in');
   
-    // Once the typing animations end, remove the cursor
-    [headerText, disclaimer, q1, q2].forEach(element => {
-      element.addEventListener('animationend', () => {
-        // Stop the blinking cursor
-        element.classList.add('done-typing');
-      });
-    });
-  
-    // After disclaimers, show questions in sequence
-    // We'll wait 4s after disclaimers finish, so about 6s total
+    // 2) After 4 seconds, hide the intro and fade in the questions
     setTimeout(() => {
       intro.classList.add('hidden');
-      questions.classList.remove('hidden');
-      // Reveal the first question & start its typewriter
-      q1.classList.remove('hidden');
-      // Then reveal second question 3s later
-      setTimeout(() => {
-        q2.classList.remove('hidden');
-      }, 3000);
-    }, 6000);
   
-    // On button click, store & retrieve
+      questions.classList.remove('hidden');
+      q1.classList.remove('hidden');
+      q2.classList.remove('hidden');
+  
+      // Fade them in
+      q1.classList.add('fade-in');
+      q2.classList.add('fade-in');
+    }, 4000);
+  
+    // 3) On button click, store & retrieve
     document.getElementById('submit').addEventListener('click', () => {
       const beautifulResponse = document.getElementById('beautifulInput').value.trim();
       const brokenResponse = document.getElementById('brokenInput').value.trim();

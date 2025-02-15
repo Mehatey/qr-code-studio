@@ -14,46 +14,23 @@ body {
     justify-content: flex-start;
   }
   
-  /* Hide elements until we remove 'hidden' in JS */
+  /* Hidden by default, we fade in via JS */
   .hidden {
     display: none;
   }
   
-  /* Typewriter effect with multi-line wrap & faster typing */
-  .typewriter {
-    display: inline-block;
-    white-space: normal;   /* allows multiple lines */
-    overflow: hidden;
-    border-right: 2px solid #fff;
-    
-    /* Type faster & blink cursor, then remove it on completion */
-    animation: typing 2s steps(50, end) forwards, blink-caret 0.7s step-end infinite;
-    
-    font-size: 18px;
-    max-width: 90%;
-    margin: 20px auto;
-    text-align: center;
-    line-height: 1.4;
+  /* Simple fade-in animation */
+  .fade-in {
+    animation: fadeIn 1.5s forwards ease-in;
   }
   
-  /* Keyframes for typewriting */
-  @keyframes typing {
-    from { width: 0; }
-    to { width: 100%; }
+  /* Keyframes for fade-in effect */
+  @keyframes fadeIn {
+    0%   { opacity: 0; }
+    100% { opacity: 1; }
   }
   
-  /* Keyframes for blinking cursor */
-  @keyframes blink-caret {
-    50% { border-color: transparent; }
-  }
-  
-  /* Class to stop the cursor blink & remove border when done */
-  .done-typing {
-    animation: none !important;
-    border-right: none !important;
-  }
-  
-  /* Centering & spacing for the Parsons logo */
+  /* Logo styling */
   #logo {
     width: 80px;
     height: auto;

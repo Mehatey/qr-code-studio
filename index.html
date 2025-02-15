@@ -9,37 +9,39 @@
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
 
+  <!-- Your CSS -->
   <link rel="stylesheet" href="styles.css" />
+  
+  <!-- Main JS -->
   <script src="script.js" defer></script>
 </head>
 <body>
   <!-- Intro Section -->
   <div id="intro">
-    <h1 class="typewriter hidden" id="headerText">the good, the bad, the nothing</h1>
-    <p class="typewriter hidden" id="disclaimer">
-      Ah good you're here through my deceit. 
-      What can I say, gotta play the game.
+    <h1 id="headerText" class="hidden">the good, the bad, the nothing</h1>
+    <p id="disclaimer" class="hidden">
+      Ah good you're here although through deceit. What can I say, gotta play the game.
     </p>
     <img src="pars.png" alt="Parsons Logo" id="logo" />
   </div>
 
   <!-- Questions Section -->
   <div id="questions" class="hidden">
-    <p class="typewriter hidden" id="q1">
+    <p id="q1" class="hidden">
       One thing beautiful about this world?
     </p>
     <textarea
       id="beautifulInput"
-      placeholder="Max 20 words, Min 5 words..."
+      placeholder="Max 20, Min 1 word..."
       class="input-text"
     ></textarea>
 
-    <p class="typewriter hidden" id="q2">
+    <p id="q2" class="hidden">
       One thing broken about this world?
     </p>
     <textarea
       id="brokenInput"
-      placeholder="Max 20 words, Min 5 words..."
+      placeholder="Max 20, Min 1 word..."
       class="input-text"
     ></textarea>
 
