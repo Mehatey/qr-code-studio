@@ -3,73 +3,54 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Studio Project</title>
+  <title>Good or Bad or Nothing at All</title>
 
-  <!-- Firebase 8 Scripts -->
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
 
-  <!-- Styles -->
   <link rel="stylesheet" href="styles.css" />
-
-  <!-- Main JS -->
   <script src="script.js" defer></script>
 </head>
 <body>
 
   <!-- SCREEN 1 (Intro) -->
-  <div id="screen1">
+  <div id="screen1" class="screen">
     <div id="topBar">
-      <!-- Left: Good, Bad, Nothing image -->
       <img src="logogb.png" alt="Good, Bad, Nothing" id="gbLogo" />
-      <!-- Right: Parsons small -->
       <img src="pars.png" alt="Parsons Logo" id="parsSmall" />
     </div>
-
-    <!-- disclaimers in separate paragraphs -->
-    <p class="disclaimerLine">
-      I apologize for deceiving you. I had to abuse the attention economy we live in.
-    </p>
-    <p class="disclaimerLine">
+    <p class="intro-text">
       Your answers to these 2 questions will help create a VR experience.
     </p>
-
-    <!-- Arrow Circle at bottom center -->
     <div id="arrowCircle"></div>
   </div>
 
   <!-- SCREEN 2 (Questions) -->
-  <div id="screen2" class="hidden">
-    <!-- Small logo on top center if you wish -->
+  <div id="screen2" class="screen hidden">
     <img src="logogb.png" alt="Good, Bad, Nothing" id="gbLogo2" />
 
     <p class="questionText">One thing beautiful about this world?</p>
-    <textarea
-      id="beautifulInput"
-      class="input-text"
-      placeholder="Max 200, Min 5 words..."
-    ></textarea>
+    <textarea id="beautifulInput" class="input-text" placeholder="write here..."></textarea>
 
     <p class="questionText">One thing broken about this world?</p>
-    <textarea
-      id="brokenInput"
-      class="input-text"
-      placeholder="Max 200, Min 5 words..."
-    ></textarea>
+    <textarea id="brokenInput" class="input-text" placeholder="write here..."></textarea>
 
-    <!-- Disabled by default, becomes enabled once both textareas have content -->
     <button id="submitBtn" disabled>I believe this.</button>
   </div>
 
   <!-- SCREEN 3 (Confirmation) -->
-  <div id="screen3" class="hidden">
+  <div id="screen3" class="screen hidden">
     <img src="yin.gif" alt="Yin Symbol" id="yinImg" />
     <p id="confirmationMessage">Your beliefs have been recorded.</p>
-    <button id="seeOthersBtn">See Others</button>
+    <button id="seeOthersBtn">See others</button>
   </div>
 
   <!-- SCREEN 4 (Responses) -->
-  <div id="screen4" class="hidden">
+  <div id="screen4" class="screen hidden">
+    <div id="responseHeader">
+      <span>Collected beliefs</span>
+      <span id="responseCount"></span>
+    </div>
     <div id="responseList"></div>
   </div>
 

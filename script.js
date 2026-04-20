@@ -71,11 +71,16 @@ document.addEventListener('DOMContentLoaded', () => {
       // Retrieve data from Firebase
       db.ref('responses').once('value', (snapshot) => {
         const data = snapshot.val() || {};
+        const entries = Object.values(data);
+        document.getElementById('responseCount').textContent = `${entries.length} responses`;
         let html = '';
-        Object.keys(data).forEach((key) => {
-          html += `<p><strong>Beautiful:</strong> ${data[key].beautiful}</p>`;
-          html += `<p><strong>Broken:</strong> ${data[key].broken}</p>`;
-          html += '<hr>';
+        entries.reverse().forEach((entry) => {
+          html += `<div class="response-card">`;
+          html += `<p class="response-label beautiful">Beautiful</p>`;
+          html += `<p class="response-text">${entry.beautiful}</p>`;
+          html += `<p class="response-label broken">Broken</p>`;
+          html += `<p class="response-text">${entry.broken}</p>`;
+          html += `</div>`;
         });
         responseList.innerHTML = html;
       });
