@@ -25,6 +25,34 @@ body::after {
 
 .hidden { display: none !important; }
 
+/* ── Loading screen ── */
+#loadingScreen {
+  position: fixed;
+  inset: 0;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999;
+  animation: fadeInSlow 0.5s ease forwards;
+}
+
+#loadingScreen.fade-out {
+  animation: screenOut 0.6s ease forwards;
+  pointer-events: none;
+}
+
+#loadingLogo {
+  width: 160px;
+  height: auto;
+  animation: logoReveal 0.8s ease 0.3s both;
+}
+
+@keyframes logoReveal {
+  from { opacity: 0; transform: scale(0.92); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
 /* ── Screens ── */
 .screen {
   min-height: 100vh;
@@ -144,25 +172,55 @@ body::after {
 }
 
 /* ── Screen 2 ── */
+#screen2 {
+  height: 100dvh;
+  min-height: unset;
+  padding: 36px 28px 88px;
+  justify-content: flex-start;
+  overflow: hidden;
+}
+
 #gbLogo2 {
-  width: 50px;
+  width: 38px;
   height: auto;
-  margin-bottom: 44px;
-  opacity: 0.45;
+  margin-bottom: 20px;
+  opacity: 0.4;
+  flex-shrink: 0;
+}
+
+.question-block {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  margin-bottom: 12px;
+}
+
+.question-block:last-of-type {
+  margin-bottom: 0;
+}
+
+.question-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 10px;
+  flex-shrink: 0;
 }
 
 .questionText {
-  font-size: 15px;
-  line-height: 1.6;
+  font-size: 13px;
+  line-height: 1.5;
   letter-spacing: 0.01em;
-  margin-bottom: 12px;
-  width: 100%;
-  color: #ddd;
+  color: #ccc;
+  margin: 0;
 }
 
 .input-text {
+  flex: 1;
+  min-height: 0;
   width: 100%;
-  min-height: 96px;
   background: transparent;
   color: #fff;
   font-family: 'Space Mono', 'Courier New', monospace;
@@ -173,6 +231,7 @@ body::after {
   padding: 6px 0 10px;
   resize: none;
   outline: none;
+  overflow-y: auto;
   transition: border-color 0.25s;
 }
 
@@ -189,10 +248,9 @@ body::after {
   font-size: 10px;
   letter-spacing: 0.1em;
   color: rgba(255,255,255,0.18);
-  text-align: right;
-  width: 100%;
-  margin-top: 5px;
-  margin-bottom: 36px;
+  white-space: nowrap;
+  margin: 0;
+  flex-shrink: 0;
   transition: color 0.3s;
 }
 

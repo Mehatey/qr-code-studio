@@ -17,6 +17,11 @@
 </head>
 <body>
 
+  <!-- LOADING -->
+  <div id="loadingScreen">
+    <img src="logogb.png" alt="Good, Bad, Nothing" id="loadingLogo" />
+  </div>
+
   <!-- SCREEN 1 -->
   <div id="screen1" class="screen">
     <div id="topBar">
@@ -34,13 +39,21 @@
   <div id="screen2" class="screen hidden">
     <img src="logogb.png" alt="Good, Bad, Nothing" id="gbLogo2" />
 
-    <p class="questionText">One thing beautiful about this world?</p>
-    <textarea id="beautifulInput" class="input-text" placeholder="write here..."></textarea>
-    <p id="wordCountB" class="word-count">0 words</p>
+    <div class="question-block">
+      <div class="question-header">
+        <p class="questionText">One thing beautiful about this world?</p>
+        <p id="wordCountB" class="word-count">0 words</p>
+      </div>
+      <textarea id="beautifulInput" class="input-text" placeholder="write here..."></textarea>
+    </div>
 
-    <p class="questionText">One thing broken about this world?</p>
-    <textarea id="brokenInput" class="input-text" placeholder="write here..."></textarea>
-    <p id="wordCountBr" class="word-count">0 words</p>
+    <div class="question-block">
+      <div class="question-header">
+        <p class="questionText">One thing broken about this world?</p>
+        <p id="wordCountBr" class="word-count">0 words</p>
+      </div>
+      <textarea id="brokenInput" class="input-text" placeholder="write here..."></textarea>
+    </div>
 
     <button id="submitBtn" disabled>I believe this.</button>
   </div>

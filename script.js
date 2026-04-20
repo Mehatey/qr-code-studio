@@ -11,6 +11,13 @@ document.addEventListener('DOMContentLoaded', () => {
   firebase.initializeApp(firebaseConfig);
   const db = firebase.database();
 
+  // ── Loading screen ──
+  const loadingScreen = document.getElementById('loadingScreen');
+  setTimeout(() => {
+    loadingScreen.classList.add('fade-out');
+    setTimeout(() => loadingScreen.classList.add('hidden'), 600);
+  }, 2000);
+
   const screen1        = document.getElementById('screen1');
   const screen2        = document.getElementById('screen2');
   const screen3        = document.getElementById('screen3');
