@@ -5,6 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Good or Bad or Nothing at All</title>
 
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
 
@@ -13,18 +17,18 @@
 </head>
 <body>
 
-  <!-- SCREEN 1 (Intro) -->
+  <!-- SCREEN 1 -->
   <div id="screen1" class="screen">
     <div id="topBar">
       <img src="logogb.png" alt="Good, Bad, Nothing" id="gbLogo" />
       <img src="pars.png" alt="Parsons Logo" id="parsSmall" />
     </div>
-    <p class="intro-text">Your answers to these 2 questions will help create a VR experience.</p>
-    <p id="countDisplay" class="count-display"></p>
+    <p class="intro-text">Your answers to these 2 questions<br>will help create a VR experience.</p>
+    <p id="countDisplay" class="count-display">&nbsp;</p>
     <div id="arrowCircle"></div>
   </div>
 
-  <!-- SCREEN 2 (Questions) -->
+  <!-- SCREEN 2 -->
   <div id="screen2" class="screen hidden">
     <img src="logogb.png" alt="Good, Bad, Nothing" id="gbLogo2" />
 
@@ -39,7 +43,7 @@
     <button id="submitBtn" disabled>I believe this.</button>
   </div>
 
-  <!-- SCREEN 3 (Confirmation) -->
+  <!-- SCREEN 3 -->
   <div id="screen3" class="screen hidden">
     <img src="yin.gif" alt="Yin Symbol" id="yinImg" />
     <p id="confirmationMessage">Your beliefs have been recorded.</p>
@@ -58,12 +62,22 @@
     <button id="seeOthersBtn">See others</button>
   </div>
 
-  <!-- SCREEN 4 (Slideshow) -->
+  <!-- SCREEN 4 -->
   <div id="screen4" class="screen hidden">
     <div id="slideHeader">
       <span id="slideCounter"></span>
+      <span id="pauseIndicator" class="pause-indicator hidden">paused</span>
     </div>
-    <div id="slideCard"></div>
+
+    <div id="slideCard">
+      <p class="slide-label">beautiful</p>
+      <p id="slideBeautiful" class="slide-text"></p>
+      <p class="slide-label broken-label">broken</p>
+      <p id="slideBroken" class="slide-text"></p>
+    </div>
+
+    <div id="slideProgress"><div id="slideProgressBar"></div></div>
+
     <div id="slideNav">
       <button id="slidePrev" class="nav-btn">←</button>
       <button id="slideNext" class="nav-btn">→</button>

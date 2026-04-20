@@ -7,17 +7,25 @@
 html, body {
   height: 100%;
   overflow-x: hidden;
-  font-family: 'Courier New', Courier, monospace;
+  font-family: 'Space Mono', 'Courier New', monospace;
   background: #000;
   color: #fff;
   -webkit-font-smoothing: antialiased;
 }
 
-.hidden {
-  display: none !important;
+/* Vignette */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,0.55) 100%);
+  pointer-events: none;
+  z-index: 9000;
 }
 
-/* ── Screen transitions ── */
+.hidden { display: none !important; }
+
+/* ── Screens ── */
 .screen {
   min-height: 100vh;
   display: flex;
@@ -35,7 +43,7 @@ html, body {
 }
 
 .screen-exit {
-  animation: screenOut 0.32s ease forwards !important;
+  animation: screenOut 0.3s ease forwards !important;
 }
 
 @keyframes screenOut {
@@ -52,27 +60,27 @@ html, body {
   margin-bottom: 56px;
 }
 
-#gbLogo  { width: 120px; height: auto; }
-#parsSmall { width: 40px; height: auto; opacity: 0.6; }
+#gbLogo    { width: 120px; height: auto; }
+#parsSmall { width: 40px;  height: auto; opacity: 0.55; }
 
 /* ── Screen 1 ── */
 .intro-text {
-  font-size: 15px;
-  line-height: 1.8;
+  font-size: 14px;
+  line-height: 1.9;
   letter-spacing: 0.02em;
-  color: #999;
+  color: #888;
   text-align: center;
-  max-width: 320px;
-  margin: auto 0 16px;
+  max-width: 300px;
+  margin: auto 0 20px;
 }
 
 .count-display {
-  font-size: 12px;
+  font-size: 11px;
   letter-spacing: 0.08em;
-  color: rgba(255,255,255,0.2);
+  color: rgba(255,255,255,0.18);
   text-align: center;
   min-height: 18px;
-  animation: fadeInSlow 1.2s ease 0.6s both;
+  animation: fadeInSlow 1s ease 0.8s both;
 }
 
 @keyframes fadeInSlow {
@@ -90,24 +98,28 @@ html, body {
   width: 52px;
   height: 52px;
   border-radius: 50%;
-  border: 1px solid rgba(255,255,255,0.3);
+  border: 1px solid rgba(255,255,255,0.25);
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  animation: arrowPulse 2.4s ease-in-out infinite;
-  transition: border-color 0.2s, background 0.2s;
+  animation: arrowPulse 2.6s ease-in-out infinite;
+  transition: border-color 0.2s, background 0.2s, transform 0.15s;
+}
+
+#arrowCircle:active {
+  transform: translateX(-50%) scale(0.92);
 }
 
 #arrowCircle:hover {
-  border-color: #fff;
-  background: rgba(255,255,255,0.05);
+  border-color: rgba(255,255,255,0.7);
+  background: rgba(255,255,255,0.04);
   animation: none;
 }
 
 @keyframes arrowPulse {
   0%, 100% { box-shadow: 0 0 0 0 rgba(255,255,255,0); }
-  50%       { box-shadow: 0 0 0 8px rgba(255,255,255,0.06); }
+  50%       { box-shadow: 0 0 0 10px rgba(255,255,255,0.05); }
 }
 
 #arrowCircle::after {
@@ -115,37 +127,38 @@ html, body {
   display: block;
   width: 9px;
   height: 9px;
-  border-right: 1.5px solid #fff;
-  border-bottom: 1.5px solid #fff;
+  border-right: 1.5px solid rgba(255,255,255,0.8);
+  border-bottom: 1.5px solid rgba(255,255,255,0.8);
   transform: rotate(45deg) translateY(-3px);
 }
 
 /* ── Screen 2 ── */
 #gbLogo2 {
-  width: 52px;
+  width: 50px;
   height: auto;
   margin-bottom: 44px;
-  opacity: 0.5;
+  opacity: 0.45;
 }
 
 .questionText {
-  font-size: 17px;
-  line-height: 1.5;
+  font-size: 15px;
+  line-height: 1.6;
   letter-spacing: 0.01em;
   margin-bottom: 12px;
   width: 100%;
+  color: #ddd;
 }
 
 .input-text {
   width: 100%;
-  min-height: 100px;
+  min-height: 96px;
   background: transparent;
   color: #fff;
-  font-family: 'Courier New', Courier, monospace;
+  font-family: 'Space Mono', 'Courier New', monospace;
   font-size: 14px;
   line-height: 1.7;
   border: none;
-  border-bottom: 1px solid rgba(255,255,255,0.15);
+  border-bottom: 1px solid rgba(255,255,255,0.12);
   padding: 6px 0 10px;
   resize: none;
   outline: none;
@@ -153,211 +166,221 @@ html, body {
 }
 
 .input-text:focus {
-  border-bottom-color: rgba(255,255,255,0.6);
+  border-bottom-color: rgba(255,255,255,0.5);
 }
 
 .input-text::placeholder {
-  color: rgba(255,255,255,0.2);
+  color: rgba(255,255,255,0.18);
   font-size: 13px;
 }
 
 .word-count {
-  font-size: 11px;
-  letter-spacing: 0.08em;
-  color: rgba(255,255,255,0.2);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: rgba(255,255,255,0.18);
   text-align: right;
   width: 100%;
-  margin-top: 4px;
+  margin-top: 5px;
   margin-bottom: 36px;
   transition: color 0.3s;
 }
 
 .word-count.wc-ok {
-  color: rgba(255,255,255,0.4);
+  color: rgba(255,255,255,0.35);
 }
 
-/* ── Submit button ── */
+/* ── Submit ── */
 #submitBtn {
   position: fixed;
   bottom: 36px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 1000;
-  font-family: 'Courier New', Courier, monospace;
-  font-size: 11px;
-  letter-spacing: 0.14em;
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   background: transparent;
-  color: rgba(255,255,255,0.18);
-  border: 1px solid rgba(255,255,255,0.1);
-  padding: 12px 30px;
+  color: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.08);
+  padding: 13px 32px;
   cursor: not-allowed;
-  transition: color 0.3s, border-color 0.3s, background 0.3s;
+  transition: color 0.3s, border-color 0.3s, transform 0.15s;
   white-space: nowrap;
 }
 
 #submitBtn.enabled {
   color: #fff;
-  border-color: rgba(255,255,255,0.45);
+  border-color: rgba(255,255,255,0.4);
   cursor: pointer;
 }
 
-#submitBtn.enabled:hover {
-  background: rgba(255,255,255,0.05);
-  border-color: #fff;
-}
+#submitBtn.enabled:hover  { background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.7); }
+#submitBtn.enabled:active { transform: translateX(-50%) scale(0.95); }
 
 #submitBtn.pulse {
-  animation: btnPulse 0.6s ease;
+  animation: btnPulse 0.7s ease;
 }
 
 @keyframes btnPulse {
-  0%   { box-shadow: 0 0 0 0 rgba(255,255,255,0.3); }
-  50%  { box-shadow: 0 0 0 10px rgba(255,255,255,0); }
+  0%   { box-shadow: 0 0 0 0 rgba(255,255,255,0.25); }
+  60%  { box-shadow: 0 0 0 12px rgba(255,255,255,0); }
   100% { box-shadow: none; }
 }
 
 /* ── Screen 3 ── */
-#screen3 {
-  justify-content: center;
-  gap: 28px;
-}
+#screen3 { justify-content: center; gap: 28px; }
 
 #yinImg {
-  width: 90px;
+  width: 88px;
   height: auto;
 }
 
 #confirmationMessage {
-  font-size: 14px;
-  letter-spacing: 0.06em;
-  color: #888;
+  font-size: 13px;
+  letter-spacing: 0.07em;
+  color: #777;
   text-align: center;
 }
 
 #echoBlock {
   width: 100%;
   max-width: 380px;
-  border-top: 1px solid rgba(255,255,255,0.07);
-  border-bottom: 1px solid rgba(255,255,255,0.07);
-  padding: 20px 0;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  padding: 22px 0;
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  animation: fadeInSlow 0.6s ease 0.2s both;
+  gap: 18px;
+  animation: fadeInSlow 0.6s ease 0.25s both;
 }
 
-.echo-row {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.echo-label {
-  font-size: 10px;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.25);
-}
-
-.echo-text {
-  font-size: 14px;
-  line-height: 1.6;
-  color: #ccc;
-}
+.echo-row    { display: flex; flex-direction: column; gap: 5px; }
+.echo-label  { font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.22); }
+.echo-text   { font-size: 13px; line-height: 1.65; color: #bbb; }
 
 #seeOthersBtn {
   position: fixed;
   bottom: 36px;
   left: 50%;
   transform: translateX(-50%);
-  font-family: 'Courier New', Courier, monospace;
-  font-size: 11px;
-  letter-spacing: 0.14em;
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   background: transparent;
   color: #fff;
-  border: 1px solid rgba(255,255,255,0.35);
-  padding: 12px 30px;
+  border: 1px solid rgba(255,255,255,0.32);
+  padding: 13px 32px;
   cursor: pointer;
   z-index: 1000;
-  transition: background 0.2s, border-color 0.2s;
+  transition: background 0.2s, border-color 0.2s, transform 0.15s;
 }
 
-#seeOthersBtn:hover {
-  background: rgba(255,255,255,0.05);
-  border-color: #fff;
-}
+#seeOthersBtn:hover  { background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.7); }
+#seeOthersBtn:active { transform: translateX(-50%) scale(0.95); }
 
-/* ── Screen 4 (Slideshow) ── */
+/* ── Screen 4 ── */
 #screen4 {
-  justify-content: center;
-  padding-top: 80px;
-  padding-bottom: 100px;
+  justify-content: flex-start;
+  padding-top: 72px;
+  padding-bottom: 110px;
   gap: 0;
+  user-select: none;
 }
 
 #slideHeader {
   width: 100%;
-  text-align: center;
-  margin-bottom: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 56px;
 }
 
 #slideCounter {
-  font-size: 11px;
-  letter-spacing: 0.12em;
+  font-size: 10px;
+  letter-spacing: 0.14em;
   color: rgba(255,255,255,0.2);
 }
 
+.pause-indicator {
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.18);
+  border: 1px solid rgba(255,255,255,0.1);
+  padding: 3px 8px;
+}
+
+/* ── Slide card ── */
 #slideCard {
   width: 100%;
-  max-width: 420px;
-  min-height: 220px;
+  flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  transition: opacity 0.2s ease;
+  gap: 8px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
 }
 
-#slideCard.slide-fade {
-  opacity: 0;
-}
+/* Directional slide transitions */
+#slideCard.exit-left  { animation: exitLeft  0.28s ease forwards; }
+#slideCard.exit-right { animation: exitRight 0.28s ease forwards; }
+#slideCard.enter-left  { animation: enterLeft  0.28s ease forwards; }
+#slideCard.enter-right { animation: enterRight 0.28s ease forwards; }
+
+@keyframes exitLeft   { to { opacity: 0; transform: translateX(-28px); } }
+@keyframes exitRight  { to { opacity: 0; transform: translateX(28px);  } }
+@keyframes enterLeft  { from { opacity: 0; transform: translateX(28px);  } to { opacity: 1; transform: none; } }
+@keyframes enterRight { from { opacity: 0; transform: translateX(-28px); } to { opacity: 1; transform: none; } }
 
 .slide-label {
-  font-size: 10px;
-  letter-spacing: 0.16em;
+  font-size: 9px;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.25);
-  margin-top: 24px;
+  color: rgba(255,255,255,0.22);
+  margin-top: 20px;
 }
 
-.slide-label:first-child {
-  margin-top: 0;
-}
-
-.broken-label {
-  margin-top: 28px;
-}
+.slide-label:first-child { margin-top: 0; }
+.broken-label            { margin-top: 28px; }
 
 .slide-text {
-  font-size: 18px;
-  line-height: 1.65;
-  color: #e8e8e8;
+  font-size: 17px;
+  line-height: 1.7;
+  color: #e2e2e2;
   letter-spacing: 0.01em;
+  word-break: break-word;
 }
 
-.loading-text {
-  font-size: 12px;
-  letter-spacing: 0.1em;
-  color: rgba(255,255,255,0.2);
-  text-align: center;
-  padding-top: 60px;
-  animation: blink 1.2s ease infinite;
+.slide-text.size-md { font-size: 14px; }
+.slide-text.size-sm { font-size: 12px; line-height: 1.65; }
+
+/* ── Progress bar ── */
+#slideProgress {
+  width: 100%;
+  height: 1px;
+  background: rgba(255,255,255,0.07);
+  margin-top: 36px;
+  position: relative;
+  overflow: hidden;
 }
 
-@keyframes blink {
-  0%, 100% { opacity: 0.3; }
-  50%       { opacity: 1; }
+#slideProgressBar {
+  height: 100%;
+  background: rgba(255,255,255,0.35);
+  width: 0%;
+}
+
+#slideProgressBar.running {
+  animation: progressFill 5s linear forwards;
+}
+
+@keyframes progressFill {
+  from { width: 0%; }
+  to   { width: 100%; }
 }
 
 /* ── Nav buttons ── */
@@ -367,27 +390,24 @@ html, body {
   left: 50%;
   transform: translateX(-50%);
   display: flex;
-  gap: 16px;
+  gap: 12px;
   z-index: 1000;
 }
 
 .nav-btn {
-  font-family: 'Courier New', Courier, monospace;
-  font-size: 16px;
+  font-family: 'Space Mono', monospace;
+  font-size: 15px;
   background: transparent;
-  color: rgba(255,255,255,0.5);
-  border: 1px solid rgba(255,255,255,0.2);
+  color: rgba(255,255,255,0.4);
+  border: 1px solid rgba(255,255,255,0.15);
   width: 48px;
   height: 48px;
   cursor: pointer;
-  transition: color 0.2s, border-color 0.2s, background 0.2s;
+  transition: color 0.2s, border-color 0.2s, transform 0.15s;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.nav-btn:hover {
-  color: #fff;
-  border-color: rgba(255,255,255,0.6);
-  background: rgba(255,255,255,0.04);
-}
+.nav-btn:hover  { color: #fff; border-color: rgba(255,255,255,0.5); }
+.nav-btn:active { transform: scale(0.92); }
