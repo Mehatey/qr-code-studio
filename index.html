@@ -19,9 +19,8 @@
       <img src="logogb.png" alt="Good, Bad, Nothing" id="gbLogo" />
       <img src="pars.png" alt="Parsons Logo" id="parsSmall" />
     </div>
-    <p class="intro-text">
-      Your answers to these 2 questions will help create a VR experience.
-    </p>
+    <p class="intro-text">Your answers to these 2 questions will help create a VR experience.</p>
+    <p id="countDisplay" class="count-display"></p>
     <div id="arrowCircle"></div>
   </div>
 
@@ -31,9 +30,11 @@
 
     <p class="questionText">One thing beautiful about this world?</p>
     <textarea id="beautifulInput" class="input-text" placeholder="write here..."></textarea>
+    <p id="wordCountB" class="word-count">0 words</p>
 
     <p class="questionText">One thing broken about this world?</p>
     <textarea id="brokenInput" class="input-text" placeholder="write here..."></textarea>
+    <p id="wordCountBr" class="word-count">0 words</p>
 
     <button id="submitBtn" disabled>I believe this.</button>
   </div>
@@ -42,16 +43,31 @@
   <div id="screen3" class="screen hidden">
     <img src="yin.gif" alt="Yin Symbol" id="yinImg" />
     <p id="confirmationMessage">Your beliefs have been recorded.</p>
+
+    <div id="echoBlock">
+      <div class="echo-row">
+        <span class="echo-label">beautiful</span>
+        <span id="echoBeautiful" class="echo-text"></span>
+      </div>
+      <div class="echo-row">
+        <span class="echo-label">broken</span>
+        <span id="echoBroken" class="echo-text"></span>
+      </div>
+    </div>
+
     <button id="seeOthersBtn">See others</button>
   </div>
 
-  <!-- SCREEN 4 (Responses) -->
+  <!-- SCREEN 4 (Slideshow) -->
   <div id="screen4" class="screen hidden">
-    <div id="responseHeader">
-      <span>Collected beliefs</span>
-      <span id="responseCount"></span>
+    <div id="slideHeader">
+      <span id="slideCounter"></span>
     </div>
-    <div id="responseList"></div>
+    <div id="slideCard"></div>
+    <div id="slideNav">
+      <button id="slidePrev" class="nav-btn">←</button>
+      <button id="slideNext" class="nav-btn">→</button>
+    </div>
   </div>
 
 </body>
