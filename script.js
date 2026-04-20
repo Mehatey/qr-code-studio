@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     // Firebase config (Version 8)
     const firebaseConfig = {
-      apiKey: "AIzaSy...",
+      apiKey: "AIzaSyAhKNE7ycFQGo_0OUChCRRSh6jKom6rWyk",
       authDomain: "good-or-bad-or-nothing-at-all.firebaseapp.com",
       databaseURL: "https://good-or-bad-or-nothing-at-all-default-rtdb.firebaseio.com",
       projectId: "good-or-bad-or-nothing-at-all",
