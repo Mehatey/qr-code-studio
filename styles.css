@@ -51,17 +51,25 @@ body::after {
   to   { opacity: 0; transform: translateY(-8px); }
 }
 
+/* ── Screen 1 override: locked to visible viewport ── */
+#screen1 {
+  height: 100dvh;
+  min-height: unset;
+  padding: 40px 28px 90px;
+  justify-content: space-between;
+  overflow: hidden;
+}
+
 /* ── Top bar ── */
 #topBar {
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 56px;
 }
 
-#gbLogo    { width: 120px; height: auto; }
-#parsSmall { width: 40px;  height: auto; opacity: 0.55; }
+#gbLogo    { width: 110px; height: auto; }
+#parsSmall { width: 36px;  height: auto; opacity: 0.55; }
 
 /* ── Screen 1 ── */
 .intro-text {
@@ -71,7 +79,14 @@ body::after {
   color: #888;
   text-align: center;
   max-width: 300px;
-  margin: auto 0 20px;
+  margin: 0;
+}
+
+.intro-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
 }
 
 .count-display {
@@ -90,11 +105,7 @@ body::after {
 
 /* ── Arrow ── */
 #arrowCircle {
-  position: fixed;
-  bottom: 36px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 1000;
+  position: relative;
   width: 52px;
   height: 52px;
   border-radius: 50%;
@@ -108,7 +119,7 @@ body::after {
 }
 
 #arrowCircle:active {
-  transform: translateX(-50%) scale(0.92);
+  transform: scale(0.92);
 }
 
 #arrowCircle:hover {
