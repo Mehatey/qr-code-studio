@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Good or Bad or Nothing at All</title>
+  <title>Bloom — a meditation that listens</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -19,17 +19,17 @@
 
   <!-- LOADING -->
   <div id="loadingScreen">
-    <img src="logogb.png" alt="Good, Bad, Nothing" id="loadingLogo" />
+    <img src="bloomlogo.png" alt="Bloom" id="loadingLogo" />
   </div>
 
   <!-- SCREEN 1 -->
   <div id="screen1" class="screen">
     <div id="topBar">
-      <img src="logogb.png" alt="Good, Bad, Nothing" id="gbLogo" />
-      <img src="pars.png" alt="Parsons Logo" id="parsSmall" />
+      <img src="bloomlogo.png" alt="Bloom" id="gbLogo" />
+      <img src="pars.png" alt="Parsons" id="parsSmall" />
     </div>
     <div class="intro-center">
-      <p class="intro-text">Your answers to these 2 questions<br>will help create a VR experience.</p>
+      <p class="intro-text">your answers join<br>the meditation.</p>
       <p id="countDisplay" class="count-display">&nbsp;</p>
     </div>
     <div id="arrowCircle"></div>
@@ -37,11 +37,11 @@
 
   <!-- SCREEN 2 -->
   <div id="screen2" class="screen hidden">
-    <img src="logogb.png" alt="Good, Bad, Nothing" id="gbLogo2" />
+    <img src="bloomlogo.png" alt="Bloom" id="gbLogo2" />
 
     <div class="question-block">
       <div class="question-header">
-        <p class="questionText">One thing beautiful about this world?</p>
+        <p class="questionText">something beautiful about your life?</p>
         <p id="wordCountB" class="word-count">0 words</p>
       </div>
       <textarea id="beautifulInput" class="input-text" placeholder="write here..."></textarea>
@@ -49,19 +49,19 @@
 
     <div class="question-block">
       <div class="question-header">
-        <p class="questionText">One thing broken about this world?</p>
+        <p class="questionText">something you fear?</p>
         <p id="wordCountBr" class="word-count">0 words</p>
       </div>
       <textarea id="brokenInput" class="input-text" placeholder="write here..."></textarea>
     </div>
 
-    <button id="submitBtn" disabled>I believe this.</button>
+    <button id="submitBtn" disabled>leave it.</button>
   </div>
 
   <!-- SCREEN 3 -->
   <div id="screen3" class="screen hidden">
     <img src="yin.gif" alt="Yin Symbol" id="yinImg" />
-    <p id="confirmationMessage">Your beliefs have been recorded.</p>
+    <p id="confirmationMessage">your answers have been received.</p>
 
     <div id="echoBlock">
       <div class="echo-row">
@@ -69,12 +69,12 @@
         <span id="echoBeautiful" class="echo-text"></span>
       </div>
       <div class="echo-row">
-        <span class="echo-label">broken</span>
+        <span class="echo-label">fear</span>
         <span id="echoBroken" class="echo-text"></span>
       </div>
     </div>
 
-    <button id="seeOthersBtn">See others</button>
+    <button id="seeOthersBtn">see others</button>
   </div>
 
   <!-- SCREEN 4 -->
@@ -87,7 +87,7 @@
     <div id="slideCard">
       <p class="slide-label">beautiful</p>
       <p id="slideBeautiful" class="slide-text"></p>
-      <p class="slide-label broken-label">broken</p>
+      <p class="slide-label broken-label">fear</p>
       <p id="slideBroken" class="slide-text"></p>
     </div>
 

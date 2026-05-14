@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const step = Math.ceil(total / 35);
     const t = setInterval(() => {
       n = Math.min(n + step, total);
-      countDisplay.textContent = `${n} people have shared their beliefs.`;
+      countDisplay.textContent = `${n} people have answered.`;
       if (n >= total) clearInterval(t);
     }, 40);
   });
@@ -204,13 +204,30 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }, { passive: true });
 
+  // ── Filter list — responses that should NEVER appear in the slideshow ──
+  // (matches case-insensitive on beautiful OR broken fields)
+  const FILTERED_PHRASES = [
+    'eva technician',
+    'cleaning the wall',
+    'clean the wall',
+    'cleaning walls',
+  ];
+
+  function isFiltered(entry) {
+    if (!entry) return true;
+    const haystack = `${entry.beautiful || ''} ${entry.broken || ''}`.toLowerCase();
+    return FILTERED_PHRASES.some(p => haystack.includes(p));
+  }
+
   // Load responses
   seeOthersBtn.addEventListener('click', () => {
     transitionTo(screen3, screen4);
 
     db.ref('responses').once('value', (snapshot) => {
       const data = snapshot.val() || {};
-      slides = Object.values(data).sort(() => Math.random() - 0.5);
+      slides = Object.values(data)
+        .filter(entry => !isFiltered(entry))
+        .sort(() => Math.random() - 0.5);
       slideIndex = 0;
       renderSlide(0);
       startProgress();
