@@ -94,26 +94,23 @@
     <button id="seeOthersBtn">see others</button>
   </div>
 
-  <!-- SCREEN 4 -->
+  <!-- SCREEN 4 — vertical auto-scroll wall of responses -->
   <div id="screen4" class="screen hidden">
-    <div id="slideHeader">
-      <span id="slideCounter"></span>
-      <span id="pauseIndicator" class="pause-indicator hidden">paused</span>
+    <div id="scrollHeader">
+      <span id="scrollCount"></span>
+      <span id="scrollPaused" class="pause-pill hidden">paused · tap to resume</span>
     </div>
 
-    <div id="slideCard">
-      <p class="slide-label">beautiful</p>
-      <p id="slideBeautiful" class="slide-text"></p>
-      <p class="slide-label broken-label">fear</p>
-      <p id="slideBroken" class="slide-text"></p>
+    <!-- Soft fade at top + bottom -->
+    <div class="fade-top"></div>
+    <div class="fade-bottom"></div>
+
+    <!-- The scrolling track. We populate this with cards (doubled for seamless loop). -->
+    <div id="scrollViewport">
+      <div id="scrollTrack"></div>
     </div>
 
-    <div id="slideProgress"><div id="slideProgressBar"></div></div>
-
-    <div id="slideNav">
-      <button id="slidePrev" class="nav-btn">←</button>
-      <button id="slideNext" class="nav-btn">→</button>
-    </div>
+    <p class="tap-hint">tap to pause</p>
   </div>
 
 </body>

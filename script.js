@@ -30,10 +30,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const wordCountB     = document.getElementById('wordCountB');
   const wordCountBr    = document.getElementById('wordCountBr');
   const countDisplay   = document.getElementById('countDisplay');
-  const slideCard      = document.getElementById('slideCard');
-  const slideCounter   = document.getElementById('slideCounter');
-  const progressBar    = document.getElementById('slideProgressBar');
-  const pauseIndicator = document.getElementById('pauseIndicator');
+  const scrollTrack    = document.getElementById('scrollTrack');
+  const scrollViewport = document.getElementById('scrollViewport');
+  const scrollCount    = document.getElementById('scrollCount');
+  const scrollPaused   = document.getElementById('scrollPaused');
 
   // ── Animated count on screen 1 (real responses + seed count) ──
   db.ref('responses').once('value', (snapshot) => {
@@ -110,102 +110,61 @@ document.addEventListener('DOMContentLoaded', () => {
     transitionTo(screen2, screen3);
   });
 
-  // ── Slideshow ──
-  let slides     = [];
-  let slideIndex = 0;
-  let paused     = false;
-  let autoTimer  = null;
+  // ── Vertical infinite auto-scroll wall ──
+  let paused = false;
 
-  function adaptSize(text) {
-    if (text.length > 220) return 'size-sm';
-    if (text.length > 110) return 'size-md';
-    return '';
+  function buildScrollCard(entry, index) {
+    // Random slight rotation for "real-world" feel — deterministic by index
+    const tilt = ((index * 37) % 7) - 3; // -3 to +3 degrees
+    const offset = ((index * 23) % 18) - 9; // -9 to +9 px horizontal
+    const card = document.createElement('div');
+    card.className = 'scroll-card';
+    card.style.setProperty('--tilt', tilt + 'deg');
+    card.style.setProperty('--xoffset', offset + 'px');
+
+    const b = document.createElement('div');
+    b.className = 'sc-block';
+    b.innerHTML = `<span class="sc-label">beautiful</span><p class="sc-text">${escapeHtml(entry.beautiful)}</p>`;
+    card.appendChild(b);
+
+    const f = document.createElement('div');
+    f.className = 'sc-block sc-fear';
+    f.innerHTML = `<span class="sc-label">fear</span><p class="sc-text">${escapeHtml(entry.broken)}</p>`;
+    card.appendChild(f);
+
+    return card;
   }
 
-  function renderSlide(index) {
-    const entry = slides[index];
-    const bEl  = document.getElementById('slideBeautiful');
-    const brEl = document.getElementById('slideBroken');
-
-    bEl.textContent  = entry.beautiful;
-    brEl.textContent = entry.broken;
-
-    bEl.className  = 'slide-text ' + adaptSize(entry.beautiful);
-    brEl.className = 'slide-text ' + adaptSize(entry.broken);
-
-    slideCounter.textContent = `${index + 1} / ${slides.length}`;
+  function escapeHtml(s) {
+    return (s || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   }
 
-  function goTo(index, direction) {
-    const exitClass  = direction === 'next' ? 'exit-left'  : 'exit-right';
-    const enterClass = direction === 'next' ? 'enter-left' : 'enter-right';
-
-    slideCard.classList.add(exitClass);
-    setTimeout(() => {
-      slideCard.classList.remove(exitClass);
-      slideIndex = (index + slides.length) % slides.length;
-      renderSlide(slideIndex);
-      slideCard.classList.add(enterClass);
-      setTimeout(() => slideCard.classList.remove(enterClass), 280);
-    }, 280);
-
-    resetProgress();
-    if (!paused) startProgress();
-  }
-
-  function startProgress() {
-    progressBar.classList.remove('running');
-    void progressBar.offsetWidth; // reflow to restart animation
-    progressBar.classList.add('running');
-    clearTimeout(autoTimer);
-    autoTimer = setTimeout(() => {
-      if (!paused) goTo(slideIndex + 1, 'next');
-    }, 5000);
-  }
-
-  function resetProgress() {
-    clearTimeout(autoTimer);
-    progressBar.classList.remove('running');
+  function buildScrollTrack(entries) {
+    scrollTrack.innerHTML = '';
+    // Shuffle for variety
+    const shuffled = [...entries].sort(() => Math.random() - 0.5);
+    // Duplicate the list once for seamless loop (CSS animates from 0 → -50%)
+    const doubled = [...shuffled, ...shuffled];
+    doubled.forEach((entry, i) => {
+      scrollTrack.appendChild(buildScrollCard(entry, i));
+    });
+    // Animation duration scales with content (slower = more readable)
+    const cards = shuffled.length;
+    const duration = Math.max(60, cards * 4); // 4s per card minimum
+    scrollTrack.style.animationDuration = duration + 's';
+    scrollCount.textContent = `${cards} people have answered`;
   }
 
   function togglePause() {
     paused = !paused;
-    pauseIndicator.classList.toggle('hidden', !paused);
-    if (paused) {
-      resetProgress();
-    } else {
-      startProgress();
-    }
+    scrollTrack.classList.toggle('paused', paused);
+    scrollPaused.classList.toggle('hidden', !paused);
   }
 
-  document.getElementById('slideNext').addEventListener('click', (e) => {
-    e.stopPropagation();
-    goTo(slideIndex + 1, 'next');
-  });
-
-  document.getElementById('slidePrev').addEventListener('click', (e) => {
-    e.stopPropagation();
-    goTo(slideIndex - 1, 'prev');
-  });
-
-  // Tap slide to pause/resume
-  slideCard.addEventListener('click', togglePause);
-
-  // Swipe gestures
-  let touchStartX = 0;
-  let touchStartY = 0;
-
-  slideCard.addEventListener('touchstart', (e) => {
-    touchStartX = e.touches[0].clientX;
-    touchStartY = e.touches[0].clientY;
-  }, { passive: true });
-
-  slideCard.addEventListener('touchend', (e) => {
-    const dx = touchStartX - e.changedTouches[0].clientX;
-    const dy = Math.abs(touchStartY - e.changedTouches[0].clientY);
-    if (Math.abs(dx) > 48 && dy < 60) {
-      dx > 0 ? goTo(slideIndex + 1, 'next') : goTo(slideIndex - 1, 'prev');
-    }
+  // Tap the viewport anywhere to toggle pause
+  scrollViewport.addEventListener('click', togglePause);
+  scrollViewport.addEventListener('touchstart', (e) => {
+    // Don't toggle if user is scrolling/dragging
   }, { passive: true });
 
   // ── Filter list — responses that should NEVER appear in the slideshow ──
@@ -394,17 +353,15 @@ document.addEventListener('DOMContentLoaded', () => {
     {beautiful: "honestly when the AC kicks on and the apartment cools down", broken: "the electric bill"},
   ];
 
-  // Load responses (merged: real Firebase + seed responses)
+  // Load responses (merged: real Firebase + seed) and build infinite scroll wall
   seeOthersBtn.addEventListener('click', () => {
     transitionTo(screen3, screen4);
 
     db.ref('responses').once('value', (snapshot) => {
       const data = snapshot.val() || {};
       const realEntries = Object.values(data).filter(entry => !isFiltered(entry));
-      slides = [...realEntries, ...SEED_RESPONSES].sort(() => Math.random() - 0.5);
-      slideIndex = 0;
-      renderSlide(0);
-      startProgress();
+      const all = [...realEntries, ...SEED_RESPONSES];
+      buildScrollTrack(all);
     });
   });
 });
