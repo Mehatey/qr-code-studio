@@ -17,16 +17,33 @@
 </head>
 <body>
 
+  <!-- Reusable BLOOM flower SVG (white for dark backgrounds) -->
+  <svg width="0" height="0" style="position:absolute" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <symbol id="bloomMark" viewBox="-100 -100 200 200">
+        <g fill="#ffffff">
+          <path d="M 0,0 C 6,-22 16,-44 6,-78 C -8,-72 -22,-58 -18,-38 C -14,-22 -4,-10 0,0 Z"/>
+          <path d="M 0,0 C 6,-22 16,-44 6,-78 C -8,-72 -22,-58 -18,-38 C -14,-22 -4,-10 0,0 Z" transform="rotate(45)"/>
+          <path d="M 0,0 C 6,-22 16,-44 6,-78 C -8,-72 -22,-58 -18,-38 C -14,-22 -4,-10 0,0 Z" transform="rotate(90)"/>
+          <path d="M 0,0 C 6,-22 16,-44 6,-78 C -8,-72 -22,-58 -18,-38 C -14,-22 -4,-10 0,0 Z" transform="rotate(135)"/>
+          <path d="M 0,0 C 6,-22 16,-44 6,-78 C -8,-72 -22,-58 -18,-38 C -14,-22 -4,-10 0,0 Z" transform="rotate(180)"/>
+          <path d="M 0,0 C 6,-22 16,-44 6,-78 C -8,-72 -22,-58 -18,-38 C -14,-22 -4,-10 0,0 Z" transform="rotate(225)"/>
+          <path d="M 0,0 C 6,-22 16,-44 6,-78 C -8,-72 -22,-58 -18,-38 C -14,-22 -4,-10 0,0 Z" transform="rotate(270)"/>
+          <path d="M 0,0 C 6,-22 16,-44 6,-78 C -8,-72 -22,-58 -18,-38 C -14,-22 -4,-10 0,0 Z" transform="rotate(315)"/>
+        </g>
+      </symbol>
+    </defs>
+  </svg>
+
   <!-- LOADING -->
   <div id="loadingScreen">
-    <img src="bloomlogo.png" alt="Bloom" id="loadingLogo" />
+    <svg id="loadingLogo" viewBox="-100 -100 200 200"><use href="#bloomMark"/></svg>
   </div>
 
   <!-- SCREEN 1 -->
   <div id="screen1" class="screen">
     <div id="topBar">
-      <img src="bloomlogo.png" alt="Bloom" id="gbLogo" />
-      <img src="pars.png" alt="Parsons" id="parsSmall" />
+      <svg id="gbLogo" viewBox="-100 -100 200 200"><use href="#bloomMark"/></svg>
     </div>
     <div class="intro-center">
       <p class="intro-text">your answers join<br>the meditation.</p>
@@ -37,7 +54,7 @@
 
   <!-- SCREEN 2 -->
   <div id="screen2" class="screen hidden">
-    <img src="bloomlogo.png" alt="Bloom" id="gbLogo2" />
+    <svg id="gbLogo2" viewBox="-100 -100 200 200"><use href="#bloomMark"/></svg>
 
     <div class="question-block">
       <div class="question-header">
@@ -60,7 +77,7 @@
 
   <!-- SCREEN 3 -->
   <div id="screen3" class="screen hidden">
-    <img src="yin.gif" alt="Yin Symbol" id="yinImg" />
+    <svg id="yinImg" viewBox="-100 -100 200 200"><use href="#bloomMark"/></svg>
     <p id="confirmationMessage">your answers have been received.</p>
 
     <div id="echoBlock">
