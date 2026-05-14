@@ -43,14 +43,28 @@ body::after {
 }
 
 #loadingLogo {
-  width: 160px;
-  height: 160px;
-  animation: logoReveal 0.8s ease 0.3s both;
+  width: clamp(280px, 60vw, 540px);
+  height: auto;
+  display: block;
+  animation: logoReveal 1.6s cubic-bezier(0.22, 1, 0.36, 1) 0.3s both;
+  filter: drop-shadow(0 0 40px rgba(255, 255, 255, 0.08));
 }
 
 @keyframes logoReveal {
-  from { opacity: 0; transform: scale(0.92); }
-  to   { opacity: 1; transform: scale(1); }
+  0%   { opacity: 0; transform: scale(0.85) translateY(8px); filter: blur(8px) drop-shadow(0 0 0 rgba(255,255,255,0)); }
+  60%  { opacity: 1; transform: scale(1.02) translateY(0);    filter: blur(0)    drop-shadow(0 0 60px rgba(255,255,255,0.15)); }
+  100% { opacity: 1; transform: scale(1)    translateY(0);    filter: blur(0)    drop-shadow(0 0 40px rgba(255,255,255,0.08)); }
+}
+
+/* Subtle breathing pulse after reveal */
+#loadingLogo {
+  animation: logoReveal 1.6s cubic-bezier(0.22, 1, 0.36, 1) 0.3s both,
+             logoBreathe 4s ease-in-out 2s infinite;
+}
+
+@keyframes logoBreathe {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.015); }
 }
 
 /* ── Screens ── */
