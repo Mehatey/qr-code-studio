@@ -205,17 +205,29 @@ document.addEventListener('DOMContentLoaded', () => {
   }, { passive: true });
 
   // ── Filter list — responses that should NEVER appear in the slideshow ──
-  // (matches case-insensitive on beautiful OR broken fields)
   const FILTERED_PHRASES = [
     'eva technician',
+    'eva the technician',
+    'making center',
     'cleaning the wall',
     'clean the wall',
     'cleaning walls',
+    'ur mom',
+    'fuck u',
+    'fuck you',
   ];
+
+  function wordCountStr(s) {
+    return (s || '').trim() === '' ? 0 : (s || '').trim().split(/\s+/).length;
+  }
 
   function isFiltered(entry) {
     if (!entry) return true;
-    const haystack = `${entry.beautiful || ''} ${entry.broken || ''}`.toLowerCase();
+    const b = (entry.beautiful || '').trim();
+    const f = (entry.broken || '').trim();
+    // Require both fields to have at least 3 words (matches form validation)
+    if (wordCountStr(b) < 3 || wordCountStr(f) < 3) return true;
+    const haystack = `${b} ${f}`.toLowerCase();
     return FILTERED_PHRASES.some(p => haystack.includes(p));
   }
 
